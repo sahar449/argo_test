@@ -9,7 +9,7 @@ spec:
       elements:
       - name: nginx
         namespace: default
-        repoURL: git@github.com:sahar449/argo_test.git
+        repoURL: https://github.com/sahar449/argo_test.git
         path: .
   template:
     metadata:
