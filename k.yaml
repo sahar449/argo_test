@@ -24,6 +24,8 @@ kind: Service
 metadata:
   name: nginx-service
   namespace: default
+  annotations:
+    argocd.argoproj.io/sync-options: Prune=false
 spec:
   selector:
     app: nginx
