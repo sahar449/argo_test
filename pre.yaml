@@ -16,7 +16,7 @@ spec:
         args:
           - |
             echo "Running PreSync Health Check..."
-            if curl -s http://nginx-service.default.svc.cluster.local:80 | grep -qi 'nginx'; then
+            if curl -s http://172.17.0.4:30001 | grep -qi 'nginx'; then
               echo "✅ PreSync Check OK"
               exit 0
             else
