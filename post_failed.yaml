@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nginx-posthook-failed
+  namespace: default
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  template:
+    spec:
+      containers:
+      - name: posthook-failed
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            echo "❌ PostSync Hook - FAILED"
+            exit 1
+      restartPolicy: Never
+  backoffLimit: 0

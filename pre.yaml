@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nginx-prehook
+  namespace: default
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: HookFailed
+spec:
+  template:
+    spec:
+      containers:
+      - name: prehook
+        image: curlimages/curl
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            echo "Running PreSync Health Check..."
+            if curl -s http://nginx-service.default.svc.cluster.local:80 | grep -qi 'nginx'; then
+              echo "✅ PreSync Check OK"
+              exit 0
+            else
+              echo "❌ PreSync Check FAILED"
+              exit 1
+            fi
+      restartPolicy: Never
+  backoffLimit: 0

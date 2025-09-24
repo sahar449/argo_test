@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nginx-posthook-ok
+  namespace: default
+  annotations:
+    argocd.argoproj.io/hook: PostSync
+spec:
+  template:
+    spec:
+      containers:
+      - name: posthook-ok
+        image: busybox
+        command: ["/bin/sh", "-c"]
+        args:
+          - |
+            echo "✅ PostSync Hook - OK"
+            exit 0
+      restartPolicy: Never
+  backoffLimit: 0
