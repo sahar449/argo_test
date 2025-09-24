@@ -4,7 +4,7 @@ metadata:
   name: nginx-posthook-failed
   namespace: default
   annotations:
-    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/hook: SyncFail
 spec:
   template:
     spec:
